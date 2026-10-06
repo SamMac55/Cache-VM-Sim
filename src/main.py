@@ -59,7 +59,7 @@ def cli():
         help = "Trace file name",
         nargs = "+", # so the plus sign means 1 or more, we need to manually check up to three
         required = True,
-        type = Path | str
+        type = Path,
     )
 
     args = parser.parse_args()

@@ -38,7 +38,7 @@ def cli():
         "-p",
         help = "Physical memory size in MB",
         type = int,
-        choices = [128, 256, 512, 1024, 2048, 4096],
+        choices = [128, 256, 512, 1024, 2048, 4096], #conflict in definitiosn in 2025 specs, check in 2026
         required = True,
     )
     # This argument will have to be checked manually...

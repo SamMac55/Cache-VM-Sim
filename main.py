@@ -30,7 +30,7 @@ def cli():
     parser.add_argument(
         "-r",
         help = "Replacement policy - Round Robin or Random",
-        type = int,
+        type = str,
         choices = ["rr", "rnd"],
         required = True,
     )

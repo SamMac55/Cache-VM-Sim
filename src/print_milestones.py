@@ -3,12 +3,15 @@ This file will include functions that print out the results according to
 assignment specifications. 
 """
 
+from pathlib import Path
+
 # Milestone 1
 def print_header( trace_files: list ):
     """
     Prints the header + trace files
     
     Input: List of trace files names
+    Note: use the pathlib Path.name to get only the name of the files.
     """
     
     """
@@ -28,13 +31,14 @@ def print_cache_input_params(
     associativity: int,
     replacement_policy: str,
     physical_memory: int,
-    percent_memory_used: int,
+    percent_memory_used: float,
     instructions_time_slice: int,
 ):
     """
     Prints cache simulator input parameters
     
     Inputs: all of the cache inputs we recieve from cli :)
+    Note: replacement policy comes in as rr or rnd, needs to be converted to full name
     """
     
     """Example: (view project specs for exact things)

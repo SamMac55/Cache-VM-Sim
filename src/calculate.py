@@ -11,8 +11,9 @@ def calc_total_blocks(cache_size: int, block_size: int) -> int:
     
     Returns total number of blocks
     """
-    # TODO: implement func
-    pass
+    total = cache_size * 2**10 / block_size
+
+    return total
     
 def calc_index(cache_size: int, block_size: int, associativity: int) -> int:
     """
@@ -20,41 +21,49 @@ def calc_index(cache_size: int, block_size: int, associativity: int) -> int:
     
     returns index bits
     """
-    # TODO : implement
-    pass
+    info = cache_size * 1024/(block_size*associativity)
+    total = math.log(info,2)
 
+    return total
+    
 def calc_num_rows(index_bits:int) -> int:
     """
     Calculates number of rows using 2^ index_bits
     
     returns #rows
     """
-    # TODO: impelemt
-    pass
+    total = 2**index_bits
+
+    return total
 
 def calc_tag_size(physical_mem_size: int, index_bits:int, block_size:int) -> int:
     """
     Calculates tag size
     Using log2(physical_mem_size * 2^20) - index_bits - log2(block_size) (I think ?)
     """
-    #TODO: implement
-    pass
+    first = math.log(physical_mem_size * 2**20,2);
+    second = math.log(block_size,2)
+
+    total = first - index_bits - second;
+
+    return total;
 
 def calc_overhead(total_blocks: int, tag_bits: int) -> int:
     """
     Calculates overhead bytes
     ( tag_bits + 1 (aka valid bit) ) * total blocks / 8 (for bytes, round up)
     """
-    # TODO: implement
-    pass
+    total = (tag_bits + 1) * total_blocks / 8;
+    return total
 
 def calc_implementation_memory_size(cache_size: int, overhead:int) -> int:
     """
     Calculates the implementation size
     NOTE: I am pretty sure off the top of my head this is just cache_size(given)* 1024 + overhead
     """
-    # TODO: implement
-    pass
+    total = cache_size * 1024 + overhead;
+
+    return total;
 
 def calc_cost(implementation_size: int, cost_per_KB: int) -> float:
     """
@@ -62,8 +71,10 @@ def calc_cost(implementation_size: int, cost_per_KB: int) -> float:
     
     NOTE: I Think cost will be a given/constant, in this case we don't need param
     """
-    # TODO: implement
-    pass
+    total = implementation_size/ 1024 * cost_per_KB;
+    total = round(total,2)
+
+    return total;
     
 # Physical calcs
 """
@@ -79,22 +90,30 @@ def calc_num_physical_pages(physical_mem_size: int) -> int:
     bits = log2(physical_mem_size)+20-12
     return 2^bits
     """
-    # TODO: implement
-    pass
+    bits = math.log(physical_mem_size,2) + 20 -12;
+    total = 2 ** bits;
+
+    return total;
 
 def calc_num_pages_system(percent_used_by_sys: float, num_phys_pages: int) -> int:
     """Calculates number of system pages using int( percent/100*num_pages )"""
-    # TODO: implement
-    pass
+
+    total = percent_used_by_sys / 100 * num_phys_pages;
+
+    return total;
 
 def calc_size_of_entry(num_pages: int) -> int:
     """"Calculates size of page table entry 1(validbit)+log2(num_pages)"""
-    # TODO: implement
-    pass
+
+    total= 1 + math.log(num_pages,2);
+
+    return total;
 
 def calc_total_ram(entry_size_bits: int, num_traces: int, page_table_entries: int) -> int:
     """Calculates total ram in bytes: page_table_entries * traces * entry_size_bits // 8"""
-    #TODO: implement
-    pass
+
+    total = (entry_size_bits * num_traces * page_table_entries) 
+    total = total // 8
+    return total;
 
     

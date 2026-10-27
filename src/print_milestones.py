@@ -44,13 +44,13 @@ def print_cache_input_params(
     """Example: (view project specs for exact things)
     
     ***** Cache Input Parameters *****
-        Cache Size: 512 KB
-        Block Size: 16 bytes
-        Associativity: 4
-        Replacement Policy: Round Robin
-        Physical Memory: 1024 MB
-        Percent Memory Used by System: 75.0%
-        Instructions / Time Slice: 100
+    Cache Size: 512 KB
+    Block Size: 16 bytes
+    Associativity: 4
+    Replacement Policy: Round Robin
+    Physical Memory: 1024 MB
+    Percent Memory Used by System: 75.0%
+    Instructions / Time Slice: 100
     """
     # TODO: implement function
     pass
@@ -75,13 +75,13 @@ def print_cache_calculated_values(
     Example: (view project specs for details)
     
     ***** Cache Calculated Values *****
-        Total # Blocks: 32768
-        Tag Size: 13 bits  Note: (based on actual physical memory)
-        Index Size: 13 bits
-        Total # Rows: 8192
-        Overhead Size: 57344 bytes
-        Implementation Memory Size: 568.00 KB (581632 bytes)
-        Cost: $39.76 @ $0.07 per KB
+    Total # Blocks: 32768
+    Tag Size: 13 bits  Note: (based on actual physical memory)
+    Index Size: 13 bits
+    Total # Rows: 8192
+    Overhead Size: 57344 bytes
+    Implementation Memory Size: 568.00 KB (581632 bytes)
+    Cost: $39.76 @ $0.07 per KB
     
     """
     # TODO: implement function   
@@ -97,6 +97,12 @@ def print_physical_mem_calculated_vals(
     Prints the physical memory calculations
     
     Inputs: calculated values from physical memory calculations
+    
+    ***** Physical Memory Calculated Values *****
+    Number of Physical Pages: 262144
+    Number of Pages for System: 196608 NOTE: ( 0.75 * 262144 = 196608 )
+    Size of Page Table Entry: 19 bits NOTE: (1 valid bit, 18 for PhysPage)
+    Total RAM for Page Table(s): 3735552 bytes NOTE :(512K entries * 3 .trc files * 19 / 8)
     """
     # TODO: implement function
     pass

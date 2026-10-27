@@ -41,19 +41,19 @@ def calc_tag_size(physical_mem_size: int, index_bits:int, block_size:int) -> int
     Calculates tag size
     Using log2(physical_mem_size * 2^20) - index_bits - log2(block_size) (I think ?)
     """
-    first = math.log(physical_mem_size * 2**20,2);
+    first = math.log(physical_mem_size * 2**20,2)
     second = math.log(block_size,2)
 
-    total = first - index_bits - second;
+    total = first - index_bits - second
 
-    return int(total);
+    return int(total)
 
 def calc_overhead(total_blocks: int, tag_bits: int) -> int:
     """
     Calculates overhead bytes
     ( tag_bits + 1 (aka valid bit) ) * total blocks / 8 (for bytes, round up)
     """
-    total = (tag_bits + 1) * total_blocks / 8;
+    total = (tag_bits + 1) * total_blocks / 8
     return int(total)
 
 def calc_implementation_memory_size(cache_size: int, overhead:int) -> int:
@@ -61,9 +61,9 @@ def calc_implementation_memory_size(cache_size: int, overhead:int) -> int:
     Calculates the implementation size
     NOTE: I am pretty sure off the top of my head this is just cache_size(given)* 1024 + overhead
     """
-    total = cache_size * 1024 + overhead;
+    total = cache_size * 1024 + overhead
 
-    return int(total);
+    return int(total)
 
 def calc_cost(implementation_size: int, cost_per_KB: int) -> float:
     """
@@ -71,10 +71,10 @@ def calc_cost(implementation_size: int, cost_per_KB: int) -> float:
     
     NOTE: I Think cost will be a given/constant, in this case we don't need param
     """
-    total = implementation_size/ 1024 * cost_per_KB;
+    total = implementation_size/ 1024 * cost_per_KB
     total = round(total,2)
 
-    return total;
+    return total
     
 # Physical calcs
 """
@@ -90,30 +90,30 @@ def calc_num_physical_pages(physical_mem_size: int) -> int:
     bits = log2(physical_mem_size)+20-12
     return 2^bits
     """
-    bits = math.log(physical_mem_size,2) + 20 -12;
-    total = 2 ** bits;
+    bits = math.log(physical_mem_size,2) + 20 -12
+    total = 2 ** bits
 
-    return int(total);
+    return int(total)
 
 def calc_num_pages_system(percent_used_by_sys: float, num_phys_pages: int) -> int:
     """Calculates number of system pages using int( percent/100*num_pages )"""
 
-    total = percent_used_by_sys / 100 * num_phys_pages;
+    total = percent_used_by_sys / 100 * num_phys_pages
 
-    return int(total);
+    return math.ceil(total)
 
 def calc_size_of_entry(num_pages: int) -> int:
     """"Calculates size of page table entry 1(validbit)+log2(num_pages)"""
 
-    total= 1 + math.log(num_pages,2);
+    total= 1 + math.log(num_pages,2)
 
-    return int(total);
+    return int(total)
 
 def calc_total_ram(entry_size_bits: int, num_traces: int, page_table_entries: int) -> int:
     """Calculates total ram in bytes: page_table_entries * traces * entry_size_bits // 8"""
 
     total = (entry_size_bits * num_traces * page_table_entries) 
     total = total // 8
-    return int(total);
+    return int(total)
 
     

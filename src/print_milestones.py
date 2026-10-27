@@ -17,7 +17,7 @@ def print_header( trace_files: list ):
     """
     Example (view specs for exact view): 
     Cache Simulator - CS 3853 – Team #XX
-        Trace File(s):
+    Trace File(s):
         Trace1.trc
         Trace2_4Evaluation.trc
         Corruption1.trc

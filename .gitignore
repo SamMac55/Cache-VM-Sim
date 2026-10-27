@@ -1,3 +1,6 @@
+# Trace files
+_Traces4Debugging/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

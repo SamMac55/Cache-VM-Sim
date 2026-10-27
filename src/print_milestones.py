@@ -80,7 +80,7 @@ def print_cache_calculated_values(
     Index Size: 13 bits
     Total # Rows: 8192
     Overhead Size: 57344 bytes
-    Implementation Memory Size: 568.00 KB (581632 bytes)
+    Implementation Memory Size: 568.00 KB (581632 bytes) NOTE: divide implementation mem size by 2**10 to get it in KB
     Cost: $39.76 @ $0.07 per KB
     
     """

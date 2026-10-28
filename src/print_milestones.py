@@ -22,8 +22,16 @@ def print_header( trace_files: list ):
         Trace2_4Evaluation.trc
         Corruption1.trc
     """
-    # TODO: implement function
-    pass
+    
+    print("Cache Simulator - CS 3853 – Team #01")
+    print()
+    print("Trace File(s):")
+
+    for trace_file in trace_files:
+        print(f"        {trace_file.name}")
+
+    print()
+
 
 def print_cache_input_params(
     cache_size: int,
@@ -52,8 +60,24 @@ def print_cache_input_params(
     Percent Memory Used by System: 75.0%
     Instructions / Time Slice: 100
     """
-    # TODO: implement function
-    pass
+    
+    print("***** Cache Input Parameters *****")
+    print()
+
+    if replacement_policy == "rr":
+        policy_name = "Round Robin"
+    else:
+        policy_name = "Random"
+
+    print(f"{'Cache Size:':40}{cache_size} KB")
+    print(f"{'Block Size:':40}{block_size} bytes")
+    print(f"{'Associativity:':40}{associativity}")
+    print(f"{'Replacement Policy:':40}{policy_name}")
+    print(f"{'Physical Memory:':40}{physical_memory} MB")
+    print(f"{'Percent Memory Used by System:':40}{percent_memory_used:.1f}%")
+    print(f"{'Instructions / Time Slice:':40}{instructions_time_slice}")
+    print()
+
 
 def print_cache_calculated_values(
     total_blocks: int,
@@ -83,9 +107,22 @@ def print_cache_calculated_values(
     Implementation Memory Size: 568.00 KB (581632 bytes) NOTE: divide implementation mem size by 2**10 to get it in KB
     Cost: $39.76 @ $0.07 per KB
     
-    """
-    # TODO: implement function   
-    pass
+    """   
+    
+    print("***** Cache Calculated Values *****")
+    print()
+
+    implementation_kb = implementation_mem_size / 1024
+
+    print(f"{'Total # Blocks:':40}{total_blocks}")
+    print(f"{'Tag Size:':40}{tag_size} bits")
+    print(f"{'Index Size:':40}{index_size} bits")
+    print(f"{'Total # Rows:':40}{total_rows}")
+    print(f"{'Overhead Size:':40}{overhead_size} bytes")
+    print(f"{'Implementation Memory Size:':40}{implementation_kb:.2f} KB ({implementation_mem_size} bytes)")
+    print(f"{'Cost:':40}${cost_total:.2f} @ ${cost_per_KB:.2f} per KB")
+    print()
+
 
 def print_physical_mem_calculated_vals(
     num_physical_pages: int,
@@ -104,8 +141,16 @@ def print_physical_mem_calculated_vals(
     Size of Page Table Entry: 19 bits NOTE: (1 valid bit, 18 for PhysPage)
     Total RAM for Page Table(s): 3735552 bytes NOTE :(512K entries * 3 .trc files * 19 / 8)
     """
-    # TODO: implement function
-    pass
+    
+    print("***** Physical Memory Calculated Values *****")
+    print()
+
+    print(f"{'Number of Physical Pages:':40}{num_physical_pages}")
+    print(f"{'Number of Pages for System:':40}{num_system_pages}")
+    print(f"{'Size of Page Table Entry:':40}{size_of_page_table_entry} bits")
+    print(f"{'Total RAM for Page Table(s):':40}{total_ram} bytes")
+    print()
+
 
 # Milestone 2
 def print_vm_sim_results(

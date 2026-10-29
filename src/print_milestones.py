@@ -28,7 +28,7 @@ def print_header( trace_files: list ):
     print("Trace File(s):")
 
     for trace_file in trace_files:
-        print(f"\t{Path(trace_file).name}")
+        print(f"        {Path(trace_file).name}")
 
     print()
 

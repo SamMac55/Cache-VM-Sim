@@ -138,6 +138,10 @@ def cli():
     if sys_percent < 0 or sys_percent > 100:
         parser.error("Percentage of physical memory used by the OS must be 0-100")
     
+    for file in args.f:
+        if not Path(file).is_file():
+            parser.error(f"{file} doesn't exist.")
+    
     # Cache size must be less than physical memory size
     if args.s*1024 >= args.p*2**20:
         parser.error("Cache size must be less than physical memory size")

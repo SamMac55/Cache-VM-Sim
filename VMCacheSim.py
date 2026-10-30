@@ -1,8 +1,8 @@
 from argparse import ArgumentParser
 from pathlib import Path
 
-import src.calculate as calculate
-import src.print_milestones as print_milestones
+import calculate
+import print_milestones
 
 def main(
     cache_size: int,

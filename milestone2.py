@@ -1,6 +1,10 @@
 from typing import NamedTuple, Optional
 from pathlib import Path
 
+# constants
+page_table_entries = 512 * 1024
+page_offset = 12 #12 bits for 4k page size
+
 class Instruction(NamedTuple):
     """
     This class basically creates an instruction object with a named tuple
@@ -39,3 +43,24 @@ def parse_trace_file(trace_file: Path) -> list:
     
     # TODO: When done, return the list of instructions
     pass
+
+class Process:
+    """Each trace file = a process, processes need to store some data, so its best to just make a class out of it nno?"""
+    
+    def __init__(self, trace_file: Path):
+        self.name = Path(trace_file).name
+        self.instructions = parse_trace_file(trace_file)
+        self.instruction_position = 0 # Index of the instruction to run, we start at zero ofc
+        self.page_table = [None for i in range(page_table_entries)]
+        self.used_entries = 0 # number of page table entries that aren't none? 
+        
+    def is_finished(self) -> bool:
+        # We finished this process when the number of isntructiosn we completed for it 
+        # is greater or equal to the length (total) instructions
+        return self.instruction_position >= len(self.instructions)
+    
+    def next_instructions(self, n:int) -> list:
+        """we will execute n instructions at a time, so we should probably ahve a way to get just those"""
+        # TODO: return n instructions with offset self.instruction_position.
+        # ex. self.instruction_position=4 we want 2 instructions, return self.instructions[4:6] which returns 4,5
+        # TODO: then increment the position to instruction_position + n

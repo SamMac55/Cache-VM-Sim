@@ -20,6 +20,8 @@ def main(
     # Constants
     cost_per_kb = 0.07
     page_table_entries = 512 * 1024
+    
+    ### MILESTONE 1 ###
     # Cache calculations
     total_blocks = calculate.calc_total_blocks(cache_size, block_size)
     index_bits = calculate.calc_index(cache_size, block_size, associativity)
@@ -35,7 +37,16 @@ def main(
     entry_size = calculate.calc_size_of_entry(num_physical_pages)
     total_ram = calculate.calc_total_ram(entry_size, len(trace_files), page_table_entries)
     
+    ### MILESTONE 2 ###
+    # Milestone 2 setup
+    """
+        Make the page tables here 1 for each trace file
+        Create the free pool queue of numbers that represent pages 0 to userpagelimit-1
+        call milestone2.runsimulation
+    """
+
     # Print everything out
+    ### MILESTONE 1 ###
     print_milestones.print_header(trace_files)
     print_milestones.print_cache_input_params(
         cache_size = cache_size,
@@ -62,6 +73,7 @@ def main(
         size_of_page_table_entry = entry_size,
         total_ram = total_ram,
     )
+    ### MILESTONE 2 ###
     
     
 def cli():

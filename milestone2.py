@@ -64,3 +64,7 @@ class Process:
         # TODO: return n instructions with offset self.instruction_position.
         # ex. self.instruction_position=4 we want 2 instructions, return self.instructions[4:6] which returns 4,5
         # TODO: then increment the position to instruction_position + n
+        
+class VMSim:
+    def __init__():
+        pass

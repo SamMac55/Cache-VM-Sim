@@ -1,5 +1,6 @@
 from typing import NamedTuple, Optional
 from pathlib import Path
+from collections import deque
 
 # constants
 page_table_entries = 512 * 1024
@@ -66,5 +67,89 @@ class Process:
         # TODO: then increment the position to instruction_position + n
         
 class VMSim:
-    def __init__():
+    def __init__(
+        self, trace_files: list, num_physical_pages: int, 
+        num_system_pages: int, instructions: int, entry_size: int
+    ):
+        self.user_pages = num_physical_pages - num_system_pages
+        self.num_system_pages = num_system_pages
+        self.instructions = instructions #NOTE: If this is -1 then we do all instructions
+        self.free_pool = [i for i in range(self.user_pages)] #We need user pages number of entries
+        self.entry_bits = entry_size
+        """
+        This may need to be changed but idea is to have {process: [(free_pool index, vpn)]}
+        where process is the process.name, free_pool index is the value that you get when you pop(0) from free pool
+        and vpn is the page number that is using it
+        """
+        self.used_pages = {}
+        """This way when we release a page we can just take this value and extend the free pool (.extend())"""
+        self.processes = []
+        for process in trace_files:
+            new_process = Process(process)
+            new_process_name = new_process.name
+            self.processes.append(new_process)
+            self.used_pages[new_process_name] = deque() #allows us to round robin FIFO when we need to replace
+        
+        self.total_translations = 0
+        self.page_table_hits = 0
+        self.pages_from_free = 0
+        self.page_faults = 0
+        self.trace_results = []
+    
+    def run(self) -> dict: # in theory return a dictionary of results
         pass
+        """
+        while at least one process is not finished
+            for each unfinished process (may need to create a list of these processes to keep track)
+                run_single_process(process)
+                check if process is finished
+                    if it is finished cleanup()
+                    remove process from list of unfinished processes
+        
+        return {
+            "system_pages": value,
+            "user_pages": value,
+            "virtual_pages_mapped": hits + misses (aka free) + faults,
+            "hits": hits,
+            "faults": faults,
+            "free": free,
+            "trace_results":self.trace_results #List of dictionaires
+        }
+        
+        """
+    
+    def run_single_process(self, process:Process):
+        """Runs a single process by perfomring trnanslations for n instructions"""
+        pass
+        """
+        for instruction in next instructions (from process class)
+        # Note that if self.instructions = -1 then we call process.next_instructions(len(process.instructions))
+            for each address in that instruction NOTE: This is the eip_addr, src, and dst
+                convert the address from a string to an int using python int(str,16)
+                virtual_page_num = address shifted to the right 12 (to get rid of the 12 offset bits)
+                self.total-translations +=1
+                check if process.page_table is none at virtual_page_num index
+                if not None: hit (increment hits as necessary)
+                if None and the free pool length is not zero: miss (free) (increment), pop free pool at zero,
+                    append (free pool at zero, vpn) to self.used_pages[process.name]
+                if none but the free pool length is zero: page fault (increment), pop from self.used_pages[process.name] (fifo)
+                    append (index, new_vpn) to self.used_pages
+
+        """
+    def cleanup(self, process:Process):
+        """Used when a process is completed"""
+        pass
+        """for used_page, vpn in self.used_pages[process.name]:
+            self.freepool.append(used_page)
+            self.trace_results.append(
+                {
+                "name": name,
+                "used_page_table_entries": value
+                "percent_used": value,
+                "wasted": (PAGE_TABLE_ENTRIES - used_entries) * entry_size_bits / 8, rounded down
+            }
+                }
+            )
+            process.pagetable = [None for i in range(page_table_entries)]
+        """
+        

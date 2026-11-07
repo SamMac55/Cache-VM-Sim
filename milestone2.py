@@ -2,6 +2,17 @@ from typing import NamedTuple, Optional
 from pathlib import Path
 from collections import deque
 
+"""
+Summary of AI usage (add any AI usage here)
+1. Gemini reminded me (Samantha) how to make a namedtuple with optional values
+2. Claude helped with the planning of the VMSim Class, specifically
+    how to seperate the function responsibilities
+3. Claude verified that the function plans (and how they would work) smelled right
+4. Claude suggested the next_instructions function in the Process class
+4. AI assisted Sofia in commenting the parse_trace_file function
+
+"""
+
 # constants
 page_table_entries = 512 * 1024
 page_offset = 12 #12 bits for 4k page size
@@ -147,9 +158,9 @@ class VMSim:
                 check if process.page_table is none at virtual_page_num index
                 if not None: hit (increment hits as necessary)
                 if None and the free pool length is not zero: miss (free) (increment), pop free pool at zero,
-                    append (free pool at zero, vpn) to self.used_pages[process.name]
-                if none but the free pool length is zero: page fault (increment), pop from self.used_pages[process.name] (fifo)
-                    append (index, new_vpn) to self.used_pages
+                    append (free pool at zero, vpn) to self.used_pages[process.name], and add that instruction to the process' page table[virtual_page_num]
+                if none but the free pool length is zero: page fault (increment), popleft from self.used_pages[process.name] (fifo)
+                    append (index, new_vpn) to self.used_pages, if self.used_pages has nothing, evict from another process's used pages
 
         """
     def cleanup(self, process:Process):

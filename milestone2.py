@@ -19,9 +19,8 @@ class Instruction(NamedTuple):
     src: Optional[str] = None
     dst: Optional[str] = None
     
-def parse_trace_file(trace_file: Path) -> list:
-        instructions = []
-
+def parse_trace_file(trace_file: Path) -> list[Instruction]:
+    instructions = []
 
     with open(trace_file, "r") as f:
         lines = f.read().splitlines()
@@ -166,4 +165,3 @@ class VMSim:
             )
             process.pagetable = [None for i in range(page_table_entries)]
         """
-        

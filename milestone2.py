@@ -137,7 +137,10 @@ class VMSim:
         """
         for instruction in next instructions (from process class)
         # Note that if self.instructions = -1 then we call process.next_instructions(len(process.instructions))
-            for each address in that instruction NOTE: This is the eip_addr, src, and dst
+            for each address in that instruction 
+                NOTE: This is the eip_addr, src, and dst (check if any of them is None)
+                NOTE: you can probably do something like for instruction in [instruction.eip_addr, instruction.src, instruction.dst]:
+                    and then if instruction: (execute everything else) this prevents doing something on None
                 convert the address from a string to an int using python int(str,16)
                 virtual_page_num = address shifted to the right 12 (to get rid of the 12 offset bits)
                 self.total-translations +=1

@@ -3,6 +3,7 @@ from pathlib import Path
 
 import calculate
 import print_milestones
+"""import VMSim from the milestone2 file"""
 
 def main(
     cache_size: int,
@@ -40,9 +41,8 @@ def main(
     ### MILESTONE 2 ###
     # Milestone 2 setup
     """
-        Make the page tables here 1 for each trace file
-        Create the free pool queue of numbers that represent pages 0 to userpagelimit-1
-        call milestone2.runsimulation
+        create a VMSim object (pass in appropriate params)
+        result = objectname.run()
     """
 
     # Print everything out
@@ -74,6 +74,13 @@ def main(
         total_ram = total_ram,
     )
     ### MILESTONE 2 ###
+    """
+    call print_milestones.print_vm_sim_results() and unpack the result
+    given from the run() call by doing something like:
+    physical_pages_by_sys = sim_result['system_pages'],
+    ...
+    traces_results = sim_result['trace_results'],
+    """
     
     
 def cli():

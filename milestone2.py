@@ -157,7 +157,7 @@ class VMSim:
             'hits': self.page_table_hits,
             'faults': self.page_faults,
             'free': self.pages_from_free,
-            'trace_results': self.trace_results.sort(key=lambda r: r['pid']),
+            'trace_results': sorted(self.trace_results, key=lambda r: r['pid']),
         }
     
     def run_single_process(self, process:Process):

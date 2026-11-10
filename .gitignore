@@ -1,6 +1,8 @@
 # Trace files
-_Traces4Debugging/*
+_Traces/*
 
+# Ortiz's version of the program
+VMCacheSim_v1.0.exe
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

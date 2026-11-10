@@ -160,14 +160,13 @@ def print_vm_sim_results(
     page_table_hits: int,
     pages_from_free: int,
     total_page_faults: int,
-    traces_results: dict
+    traces_results: list
 ):
     """
     Prints virtual simulation results
     
     Inputs: simulation results
-    NOTE: traces results is a dict in format:
-    { trace_file_name: {used_entries: int, table_wasted: int}}
+    NOTE: traces results is a list of dictionaries (view VMCacheSim.py)
     """
     """Example (view docs for info)
     

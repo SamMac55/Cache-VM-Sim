@@ -222,7 +222,9 @@ class VMSim:
     def cleanup(self, process:Process):
         """Used when a process is completed"""
         pass
-        """for used_page, vpn in self.used_pages[process.pid]:
+        """
+        something like: 
+        for used_page, vpn in self.used_pages[process.pid]:
             self.freepool.append(used_page)
             self.trace_results.append(
                 {
@@ -234,5 +236,6 @@ class VMSim:
             }
                 }
             )
+            # Clear things up
             process.pagetable = [None for i in range(page_table_entries)]
         """

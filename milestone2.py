@@ -1,4 +1,5 @@
 import math
+from tracemalloc import start
 from typing import NamedTuple, Optional
 from pathlib import Path
 from collections import deque
@@ -12,6 +13,8 @@ Summary of AI usage (add any AI usage here)
 4. Claude suggested the next_instructions function in the Process class
 5. AI assisted Sofia in commenting the parse_trace_file function
 6. Claude helped reminded Sam how to sort a list of dicts by a specific key (lambda function)
+7. AI helped Gerald with testing scripts. It provided the script after Gerald made the code and explained what he needed to 
+    accomplish in his classes. 
 """
 
 # constants
@@ -87,10 +90,22 @@ class Process:
         return self.instruction_position >= len(self.instructions)
     
     def next_instructions(self, n:int) -> list[Instruction]:
-        """we will execute n instructions at a time, so we should probably ahve a way to get just those"""
+        """we will execute n instructions at a time, so we should probably have a way to get just those"""
         # TODO: return n instructions with offset self.instruction_position.
         # ex. self.instruction_position=4 we want 2 instructions, return self.instructions[4:6] which returns 4,5
         # TODO: then increment the position to instruction_position + n
+
+        #Grab the first instruction, Count all inst to see where to end, get all inst between start and end, update posisiton to be the
+        # latest, send selected instr up.  
+
+        start = self.instruction_position
+        end = min(start + n, len(self.instructions))
+
+        batch = self.instructions[start:end]
+        self.instruction_position = end
+
+        return batch
+        
         
 class VMSim:
     def __init__(
@@ -239,3 +254,29 @@ class VMSim:
             # Clear things up
             process.pagetable = [None for i in range(page_table_entries)]
         """
+
+        # Count the pages used by the process, calculate page table usage and wasted memory,
+        # save the stats, return physical pages to the free pool, remove page mappings,
+        # and clear the process's used pages.
+
+        used_entries = len(self.used_pages[process.pid])
+
+        percent_used = (used_entries / page_table_entries) * 100
+
+        wasted = ((page_table_entries - used_entries)
+                * self.entry_bits) // 8
+
+        self.trace_results.append({
+            "pid": process.pid,
+            "name": process.name,
+            "used_page_table_entries": used_entries,
+            "percent_used": percent_used,
+            "wasted": wasted
+        })
+
+        for physical_page, vpn in self.used_pages[process.pid]:
+            self.free_pool.append(physical_page)
+            process.page_table[vpn] = None
+
+        self.used_pages[process.pid].clear()
+

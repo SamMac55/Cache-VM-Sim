@@ -78,7 +78,8 @@ dstM: 00000000 --------    srcM: 0012e110 06000000
         finally:
             if os.path.exists(temp_file_path):
                 os.remove(temp_file_path)
-        
+  
+## Gerald made these tests      
 class TestCleanup(unittest.TestCase):
     def test_cleanup(self):
         # Create a process without needing a trace file

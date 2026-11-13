@@ -194,6 +194,30 @@ def print_vm_sim_results(
         Page Table Wasted: 1244699 bytes
         """
     # TODO: implement function for milestone 2
+
+    print("***** Virtual memory simulation results *****")
+    print()
+
+    print(f"        physical pages used by SYSTEM: {physical_pages_by_sys}")
+    print(f"        pages available to user: {pages_for_user}")
+    print(f"        virtual pages mapped: {virtual_pages_mapped}")
+    print("        ------------------------------")
+
+    print(f"        page table hits: {page_table_hits}")
+    print(f"        pages from free: {pages_from_free}")
+    print(f"        total page faults: {total_page_faults}")
+
+    print("        page table usage per process:")
+    print("        ------------------------------")
+
+    for result in traces_results:
+        print(f"        [{result['pid']}] {result['name']}:")
+        print(f"        used page table entries: {result['used_page_table_entries']} ( {result['percent_used']:.2f}%)")
+        print(f"        page table wasted: {result['wasted']} bytes")
+
+    print()
+
+
     pass
 
 # Milestone 3

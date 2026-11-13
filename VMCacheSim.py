@@ -3,7 +3,7 @@ from pathlib import Path
 
 import calculate
 import print_milestones
-"""import VMSim from the milestone2 file"""
+from milestone2 import VMSim
 
 def main(
     cache_size: int,
@@ -40,10 +40,15 @@ def main(
     
     ### MILESTONE 2 ###
     # Milestone 2 setup
-    """
-        create a VMSim object (pass in appropriate params)
-        result = objectname.run()
-    """
+    sim = VMSim(
+        trace_files,
+        num_physical_pages,
+        system_pages,
+        time_slice,
+        entry_size
+    )
+
+    result = sim.run()
 
     # Print everything out
     ### MILESTONE 1 ###
@@ -81,6 +86,12 @@ def main(
     ...
     traces_results = sim_result['trace_results'],
     """
+
+    """
+    Temporary print method for testing - Chris
+    """
+
+    print(result)
     
     
 def cli():

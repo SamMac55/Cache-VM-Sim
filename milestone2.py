@@ -12,7 +12,8 @@ Summary of AI usage (add any AI usage here)
 5. AI assisted Sofia in commenting the parse_trace_file function
 6. Claude helped reminded Sam how to sort a list of dicts by a specific key (lambda function)
 7. AI helped Gerald with testing scripts. It provided the script after Gerald made the code and explained what he needed to 
-    accomplish in his classes. 
+    accomplish in his classes.
+8. Chris used AI to gut-check his understanding of milestone2.py functionality before writing up the milestone report
 """
 
 # constants

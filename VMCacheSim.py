@@ -87,11 +87,15 @@ def main(
     traces_results = sim_result['trace_results'],
     """
 
-    """
-    Temporary print method for testing - Chris
-    """
-
-    print(result)
+    print_milestones.print_vm_sim_results(
+        physical_pages_by_sys=result['system_pages'],
+        pages_for_user=result['user_pages'],
+        virtual_pages_mapped=result['virtual_pages_mapped'],
+        page_table_hits=result['hits'],
+        pages_from_free=result['free'],
+        total_page_faults=result['faults'],
+        traces_results=result['trace_results']
+    )
     
     
 def cli():

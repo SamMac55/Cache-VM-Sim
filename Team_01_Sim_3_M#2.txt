@@ -1,0 +1,57 @@
+Cache Simulator - CS 3853 – Team #01
+
+Trace File(s):
+        A-9_new_trunk1.trc
+        Corruption2.trc
+        A-9_new_trunk2.trc
+
+***** Cache Input Parameters *****
+
+Cache Size:                             1024 KB
+Block Size:                             32 bytes
+Associativity:                          4
+Replacement Policy:                     Round Robin
+Physical Memory:                        2048 MB
+Percent Memory Used by System:          65.0%
+Instructions / Time Slice:              80
+
+***** Cache Calculated Values *****
+
+Total # Blocks:                         32768
+Tag Size:                               13 bits
+Index Size:                             13 bits
+Total # Rows:                           8192
+Overhead Size:                          57344 bytes
+Implementation Memory Size:             1080.00 KB (1105920 bytes)
+Cost:                                   $75.60 @ $0.07 per KB
+
+***** Physical Memory Calculated Values *****
+
+Number of Physical Pages:               524288
+Number of Pages for System:             340788
+Size of Page Table Entry:               20 bits
+Total RAM for Page Table(s):            3932160 bytes
+
+***** Virtual memory simulation results *****
+
+Physical Pages Used By SYSTEM:          340788
+Pages Available to User:                183500
+
+Virtual Pages Mapped:                   655300
+        ------------------------------
+        Page Table Hits:                654137
+        Pages from Free:                1163
+        Total Page Faults:              0
+
+Page Table Usage Per Process:
+        ------------------------------
+[0] A-9_new_trunk1.trc:
+        Used Page Table Entries:        337 ( 0.06%)
+        Page Table Wasted:              1309877 bytes
+[1] Corruption2.trc:
+        Used Page Table Entries:        489 ( 0.09%)
+        Page Table Wasted:              1309497 bytes
+[2] A-9_new_trunk2.trc:
+        Used Page Table Entries:        337 ( 0.06%)
+        Page Table Wasted:              1309877 bytes
+

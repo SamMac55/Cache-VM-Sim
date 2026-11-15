@@ -193,32 +193,29 @@ def print_vm_sim_results(
         Used Page Table Entries: 204 ( 0.04%)
         Page Table Wasted: 1244699 bytes
         """
-    # TODO: implement function for milestone 2
 
     print("***** Virtual memory simulation results *****")
     print()
 
-    print(f"        physical pages used by SYSTEM: {physical_pages_by_sys}")
-    print(f"        pages available to user: {pages_for_user}")
-    print(f"        virtual pages mapped: {virtual_pages_mapped}")
+    print(f"{'Physical Pages Used By SYSTEM:':40}{physical_pages_by_sys}")
+    print(f"{'Pages Available to User:':40}{pages_for_user}")
+    print()
+    print(f"{'Virtual Pages Mapped:':40}{virtual_pages_mapped}")
     print("        ------------------------------")
 
-    print(f"        page table hits: {page_table_hits}")
-    print(f"        pages from free: {pages_from_free}")
-    print(f"        total page faults: {total_page_faults}")
-
-    print("        page table usage per process:")
+    print(f"        {'Page Table Hits:':31} {page_table_hits}")
+    print(f"        {'Pages from Free:':31} {pages_from_free}")
+    print(f"        {'Total Page Faults:':31} {total_page_faults}")
+    print()
+    print("Page Table Usage Per Process:")
     print("        ------------------------------")
 
     for result in traces_results:
-        print(f"        [{result['pid']}] {result['name']}:")
-        print(f"        used page table entries: {result['used_page_table_entries']} ( {result['percent_used']:.2f}%)")
-        print(f"        page table wasted: {result['wasted']} bytes")
+        print(f"[{result['pid']}] {result['name']}:")
+        print(f"        {'Used Page Table Entries:':31} {result['used_page_table_entries']} ( {result['percent_used']:.2f}%)")
+        print(f"        {'Page Table Wasted:':31} {result['wasted']} bytes")
 
     print()
-
-
-    pass
 
 # Milestone 3
 def print_cache_sim_results(

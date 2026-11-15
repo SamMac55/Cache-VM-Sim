@@ -1,5 +1,3 @@
-import math
-from tracemalloc import start
 from typing import NamedTuple, Optional
 from pathlib import Path
 from collections import deque
@@ -236,7 +234,6 @@ class VMSim:
                 
     def cleanup(self, process:Process):
         """Used when a process is completed"""
-        pass
         """
         something like: 
         for used_page, vpn in self.used_pages[process.pid]:

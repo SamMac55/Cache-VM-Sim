@@ -1,6 +1,6 @@
 """
 AI Disclosure
-
+1. Samantha asked Claude if the setup for the code skeleton smelled right.
 """
 import math
 import random

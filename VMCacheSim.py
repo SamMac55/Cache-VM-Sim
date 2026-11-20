@@ -4,6 +4,7 @@ from pathlib import Path
 import calculate
 import print_milestones
 from milestone2 import VMSim
+# from mileston2 import Cache
 
 def main(
     cache_size: int,
@@ -38,6 +39,8 @@ def main(
     entry_size = calculate.calc_size_of_entry(num_physical_pages)
     total_ram = calculate.calc_total_ram(entry_size, len(trace_files), page_table_entries)
     
+    ## MILESTONE 3 setup
+    # create a cache object :)
     ### MILESTONE 2 ###
     # Milestone 2 setup
     sim = VMSim(
@@ -45,7 +48,8 @@ def main(
         num_physical_pages,
         system_pages,
         time_slice,
-        entry_size
+        entry_size,
+        # pass in the cache object
     )
 
     result = sim.run()
@@ -96,6 +100,10 @@ def main(
         total_page_faults=result['faults'],
         traces_results=result['trace_results']
     )
+    
+    # get all of the information needed for the cache that print needs
+        # NOTE: Cpi is this: cache.calc_CPI(sum(len(p.instructions) for p in sim.processes))
+    # call print_milestones cahce print statements
     
     
 def cli():

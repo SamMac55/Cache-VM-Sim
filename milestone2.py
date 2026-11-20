@@ -1,6 +1,7 @@
 from typing import NamedTuple, Optional
 from pathlib import Path
 from collections import deque
+from milestone3 import Cache
 
 """
 Summary of AI usage (add any AI usage here)
@@ -109,13 +110,15 @@ class Process:
 class VMSim:
     def __init__(
         self, trace_files: list, num_physical_pages: int, 
-        num_system_pages: int, instructions: int, entry_size: int
+        num_system_pages: int, instructions: int, entry_size: int,
+        cache: Cache
     ):
         self.user_pages = num_physical_pages - num_system_pages
         self.num_system_pages = num_system_pages
         self.time_slice = instructions #NOTE: If this is -1 then we do all instructions
         self.free_pool = [i for i in range(self.user_pages)] #We need user pages number of entries
         self.entry_bits = entry_size
+        self.cache = cache
         """
         This may need to be changed but idea is to have {process: [(free_pool index, vpn)]}
         where process is the process.pid, free_pool index is the value that you get when you pop(0) from free pool
@@ -198,23 +201,34 @@ class VMSim:
         num_instructions = len(process.instructions) if self.time_slice == -1 else self.time_slice
         
         for instruction in process.next_instructions(num_instructions):
+            """
+            TODO: MILESTONE3 - change this loop to loop over the addresses zipped with ("inst", "src", "data")
+            for addr, type, length in zip((instruction.eip_addr, instruction.src, instruction.dst), ("inst", "src", "dst"), (instruction.eip_len, 4, 4)):
+            we need this because the instruction line has different clock cycles than data addresses
+            """
             for addr in (instruction.eip_addr, instruction.src, instruction.dst): 
                 if addr is None: continue # We don't want to run into None errors so continue if address is None
                 addr_as_int = int(addr, 16) # I didn't know this was a thing, but very convenient!
                 vpn = addr_as_int >> page_offset
+                addr_offset =  addr_as_int % (2** page_offset)
                 self.total_translations += 1
                 
                 if process.page_table[vpn] is not None:
                     self.page_table_hits += 1
+                    # Physical page = process.page_table[vpn] * 2**page_offset + addr_offset
+                    """TODO: Milestone 3: call cache.process_addr(physical_page, type, length)"""
                 
                 elif process.page_table[vpn] is None and len(self.free_pool) > 0:
                     self.pages_from_free += 1
                     resource = self.free_pool.pop(0)
                     self.used_pages[process.pid].append((resource, vpn))
                     process.page_table[vpn] = resource
+                    # Physical page = resource * 2**page_offset + addr_offset
+                    """TODO: Milestone 3: call cache.process_addr(physical_page, type, length)"""
                 
                 else:
                     self.page_faults += 1
+                    """TODO milestone 3- do something like self.cache.clock_cycles += 100"""
                     if len(self.used_pages[process.pid]) > 0:
                         # If we can take from ourselves lets do that
                         resource, old_vpn = self.used_pages[process.pid].popleft()
@@ -231,7 +245,11 @@ class VMSim:
                                 victim.page_table[old_vpn] = None
                                 process.page_table[vpn] = resource
                                 break
-                        # I am going to assume that there will never be a case where all of the processes have 0 used pages
+                    """TODO MILESTONE 3- call the invalidate_blocks function to invalidate (resource, given page_offset)"""
+                    # Physical page = resource * 2**page_offset + addr_offset
+                    """TODO: Milestone 3: call cache.process_addr(physical_page, type, length)"""
+                    
+                    # I am going to assume that there will never be a case where all of the processes have 0 used pages
                 
     def cleanup(self, process:Process):
         """Used when a process is completed"""
@@ -273,6 +291,7 @@ class VMSim:
         })
 
         for physical_page, vpn in self.used_pages[process.pid]:
+            """MILESTONE 3 TODO call the cache invalidate page using physical page and 2**page_offset"""
             self.free_pool.append(physical_page)
             process.page_table[vpn] = None
 
